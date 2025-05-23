@@ -2,6 +2,7 @@ FROM azul/zulu-openjdk-debian:17-latest
 
 RUN  apt-get update \
   && apt-get install -y wget \
+  && apt-get install -y unzip \
   && rm -rf /var/lib/apt/lists/*
 
 ENV MCL_VERSION v2.1.2
