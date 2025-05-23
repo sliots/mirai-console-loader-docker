@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk11:alpine-jre
+FROM azul/zulu-openjdk-debian:17-latest
 
 ENV MCL_VERSION v2.1.2
 
@@ -12,12 +12,12 @@ RUN export zip_name=$(echo ${MCL_VERSION} | sed 's/v/mcl-/') &&\
 RUN chmod +x mcl && \
     ./mcl --update-package net.mamoe:mirai-core-all &&\
     ./mcl --update-package org.itxtech:mcl-addon &&\
-    ./mcl --update-package org.itxtech:soyuz &&\
     ./mcl --update-package net.mamoe:mirai-api-http --channel stable-v2 --type plugin &&\
     ./mcl --update-package net.mamoe:mirai-login-solver-selenium --channel nightly --type plugin &&\
     ./mcl --dry-run
 
 ENV JAVA_OPTS -Dmirai.slider.captcha.supported
+ENV JAVA_OPTS -Dmirai.console.skip-end-user-readme
 
 VOLUME ["/app/plugins","/app/config","/app/data","/app/bots","/app/logs"]
 
